@@ -1,0 +1,33 @@
+/* SECTION VARIABLES */
+:root {
+  --bling: green;
+  --team-1: red;
+  --team-2: blue;
+}
+
+/* !SECTION VARIABLES */
+
+/* SECTION CLASSES */
+
+.bank {
+  background-color: var(--bling);
+}
+
+.team-1 {
+  background-color: var(--team-1);
+  min-width: 30dvw;
+}
+
+.team-2 {
+  background-color: var(--team-2);
+  min-width: 30dvw;
+}
+
+.bet-btn {
+  background-color: var(--bling);
+  border-radius: 15px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+/* !SECTION CLASSES */
