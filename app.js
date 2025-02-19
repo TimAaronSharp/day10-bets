@@ -1,4 +1,4 @@
-let bank = 100
+let bling = 100
 
 const players = [
   { teamNumber: 1, emoji: '🏃‍♂️', skill: 10, name: "D'Marcus Williums" },
@@ -23,7 +23,6 @@ const players = [
   { teamNumber: 2, emoji: '🐅', skill: 100, name: "Tiger" },
 ]
 
-// Need function to 
 
 function drawTeam1() {
   const teamRoster = document.getElementById('roster-1')
@@ -38,8 +37,6 @@ function drawTeam1() {
   }
 }
 
-drawTeam1()
-
 function drawTeam2() {
   const teamRoster = document.getElementById('roster-2')
   const team2 = players.filter((player) => player.teamNumber == 2)
@@ -53,4 +50,58 @@ function drawTeam2() {
   }
 }
 
+function placeBets(team, bet) {
+  let team1Skill = 0
+  let team2Skill = 0
+  if (bet > bling && bling != 0) {
+    window.alert('Not enough dosh, chump!')
+    return
+  }
+  checkBling(bet)
+  players.forEach((player) => {
+    if (player.teamNumber == 1) {
+      team1Skill += player.skill
+    } else {
+      team2Skill += player.skill
+    }
+  })
+  console.log(team1Skill + " vs " + team2Skill);
+
+  if (team == 1 && team1Skill > team2Skill) {
+    bling += bet
+  } else if (team == 2 && team2Skill > team1Skill) {
+    bling += bet
+  } else if (team == 1 && team1Skill < team2Skill) {
+    bling -= bet
+  } else if (team == 2 && team2Skill < team1Skill) {
+    bling -= bet
+  }
+
+  checkBling(bet)
+  drawBling()
+}
+
+function drawBling() {
+  const blingBox = document.getElementById('bling-box')
+  blingBox.innerText = '$' + bling
+}
+
+function lose() {
+  if (bling <= 0) {
+    window.alert('YOU LOSE GOOD DAY SIR!')
+  }
+}
+// I don't think you can mathematically get below $5 with these bet amounts, but just in case so you don't get stuck and can't bet
+function checkBling(bet) {
+  if (bet < 5 || bling == 0) {
+    window.alert('YOU LOSE GOOD DAY SIR!')
+  }
+  if (bling == 0) {
+    bling = 100
+  }
+}
+
+
+drawTeam1()
 drawTeam2()
+drawBling()
