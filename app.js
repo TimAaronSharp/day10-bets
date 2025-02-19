@@ -24,3 +24,33 @@ const players = [
 ]
 
 // Need function to 
+
+function drawTeam1() {
+  const teamRoster = document.getElementById('roster-1')
+  const team1 = players.filter((player) => player.teamNumber == 1)
+  console.log(teamRoster);
+
+  console.log(team1);
+
+
+  for (let i = 0; i < team1.length; i++) {
+    teamRoster.innerText += team1[i].emoji
+  }
+}
+
+drawTeam1()
+
+function drawTeam2() {
+  const teamRoster = document.getElementById('roster-2')
+  const team2 = players.filter((player) => player.teamNumber == 2)
+  console.log(teamRoster);
+
+  console.log(team2);
+
+
+  for (let i = 0; i < team2.length; i++) {
+    teamRoster.innerText += team2[i].emoji
+  }
+}
+
+drawTeam2()
