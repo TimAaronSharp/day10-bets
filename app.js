@@ -23,36 +23,43 @@ const players = [
   { teamNumber: 2, emoji: '🐅', skill: 100, name: "Tiger" },
 ]
 
+function draftTeams() {
+  players.forEach((player => {
+    let draft = Math.random() * 2
+    console.log(draft);
 
-function drawTeam1() {
-  const teamRoster = document.getElementById('roster-1')
-  const team1 = players.filter((player) => player.teamNumber == 1)
-  console.log(teamRoster);
-
-  console.log(team1);
-
-
-  for (let i = 0; i < team1.length; i++) {
-    teamRoster.innerText += team1[i].emoji
-  }
+    if (draft < 1) {
+      player.teamNumber = 1
+    } else {
+      player.teamNumber = 2
+    }
+  }))
+  console.log(players);
+  drawTeams()
 }
 
-function drawTeam2() {
-  const teamRoster = document.getElementById('roster-2')
+function drawTeams() {
+  const teamRoster1 = document.getElementById('roster-1')
+  const team1 = players.filter((player) => player.teamNumber == 1)
+  const teamRoster2 = document.getElementById('roster-2')
   const team2 = players.filter((player) => player.teamNumber == 2)
-  console.log(teamRoster);
+  teamRoster1.innerText = ''
+  teamRoster2.innerText = ''
 
-  console.log(team2);
-
-
+  for (let i = 0; i < team1.length; i++) {
+    teamRoster1.innerText += team1[i].emoji
+  }
   for (let i = 0; i < team2.length; i++) {
-    teamRoster.innerText += team2[i].emoji
+    teamRoster2.innerText += team2[i].emoji
   }
 }
 
 function placeBets(team, bet) {
   let team1Skill = 0
   let team2Skill = 0
+  if (bet == 500) {
+    bet = bling
+  }
   if (bet > bling && bling != 0) {
     window.alert('Not enough dosh, chump!')
     return
@@ -79,6 +86,7 @@ function placeBets(team, bet) {
 
   checkBling(bet)
   drawBling()
+  draftTeams()
 }
 
 function drawBling() {
@@ -86,11 +94,11 @@ function drawBling() {
   blingBox.innerText = '$' + bling
 }
 
-function lose() {
-  if (bling <= 0) {
-    window.alert('YOU LOSE GOOD DAY SIR!')
-  }
-}
+// function lose() {
+//   if (bling <= 0) {
+//     window.alert('YOU LOSE GOOD DAY SIR!')
+//   }
+// }
 // I don't think you can mathematically get below $5 with these bet amounts, but just in case so you don't get stuck and can't bet
 function checkBling(bet) {
   if (bet < 5 || bling == 0) {
@@ -101,7 +109,10 @@ function checkBling(bet) {
   }
 }
 
-
-drawTeam1()
-drawTeam2()
+function resetTeams() {
+  players
+}
+draftTeams()
+// drawTeam1()
+// drawTeam2()
 drawBling()
